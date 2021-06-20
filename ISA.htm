@@ -1,0 +1,206 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+  <title>Untitled</title>
+
+</head>
+
+<body>
+<center><h1>INTERNATIONAL STANDARD ATMOSPHERIC CONDITIONS</h1> </center>    <br>
+<center><h2>PRESSURE, DENSITY & TEMPERATURE</h2> </center>
+ <table border = "1"><tr><td>International Standard Atmosphere</td>  </tr>
+ <tr><td>Sea Level Conditions</td></tr>
+ <tr><td>Pressure = 1 atm (10<sup>5</sup> Pa)</td></tr>
+ <tr><td>Density = 1.225 kg/m<sup>3</sup></td></tr>
+ <tr><td>Temperature = 288.16 K</td></tr>
+ <tr><td>Acceleration due to gravity = 9.81 m/s<sup>2</sup></td></tr>
+ <tr><td>Universal Gas Constant = 287 J/(Kg-K)</td></tr></table>  <br>
+  <label><b>Enter Height</b></label> <br>
+ <input type="text" id="height" />      <br>  <br>
+ <button onclick="main()">Get Results</button> <br>    <br>
+ <b>Name of the layer of Atmosphere</b>
+  <input type="text" id="Na" disabled/>        <br>     <br>
+ <b>Temperature</b>
+  <input type="text" id="t" disabled/>  <br>     <br>
+   <b>Density</b>
+  <input type="text" id="De" disabled/>     <br>    <br>
+   <b>Pressure</b>
+  <input type="text" id="Pr" disabled/>   <br>    <br>
+   <script>
+  function f(x) //Temperature function for 0 to 11KM
+{
+    var a = 288.16-(6.5*x);
+    return a;
+}
+
+function g(x) //Temperature function for 25 to 47KM
+{
+    var a = 288.16+(3*x);
+    return a;
+}
+
+function j(x) //Temperature function for 53 to 79KM
+{
+    var a = 288.16-(4.5*x);
+    return a;
+}
+
+function k(x) //Temperature function for 90 to 105KM
+{
+    var a = 288.16+(4*x);
+    return a;
+}
+
+function l(x) //Pressure Function function for 0 to 11KM
+{
+    var g0, a, T, R,P;
+    g0 = -9.81, a = -0.0065, R = 287, P = 100000, T = 288.16;
+    var b1 = Math.pow((x/T),(g0/(a*R)));
+    var b = b1*P;
+    return b;
+}
+
+function ld(x) //Density Function function for 0 to 11KM
+{
+    var g0, a,T, R,P;
+    g0 = 9.81, a = -0.0065, R = 287, P = 1.225, T = 288.16;
+    var b1 = Math.pow((x/T),-((g0/(a*R))+1));
+    var b = b1*P;
+    return b;
+}
+
+function m(x) //Pressure Function function for 25 to 47KM
+{
+    var g0, a,T, R,P;
+    g0 = -9.81, a = 0.003, R = 287, P = 100000, T = 288.16;
+    var b1 = Math.pow((x/T),(g0/a*R));
+    var b = b1*P;
+    return b;
+}
+
+function md(x) //Density Function function for 25 to 47KM
+{
+    var g0, a, T, R,P;
+    g0 = 9.81, a = 0.003, R = 287, P = 1.225, T = 288.16;
+    var b1 = Math.pow((x/T),-((g0/(a*R))+1));
+    var b = b1*P;
+    return b;
+}
+
+function n(x) //Pressure Function function for 53 to 79KM
+{
+    var g0, a,T, R,P;
+    g0 = -9.81, a = -0.0045, R = 287, P = 100000, T = 288.16;
+    var b1 = Math.pow((x/T),(g0/a*R));
+    var b = b1*P;
+    return b;
+}
+
+function nd(x) //Density Function function for 53 to 79KM
+{
+    var g0, a,T, R,P;
+    g0 = 9.81, a = -0.0045, R = 287, P = 1.225, T = 288.16;
+    var b1 = Math.pow((x/T),-((g0/(a*R))+1));
+    var b = b1*P;
+    return b;
+}
+
+function q(x) //Pressure Function function for 90 to 105KM
+{
+    var g0, a, T, R,P;
+    g0 = -9.81, a = 0.004, R = 287, P = 100000, T = 288.16;
+    var b1 = Math.pow((x/T),(g0/a*R));
+    var b = b1*P;
+    return b;
+}
+
+function qd(x) //Density Function function for 90 to 105KM
+{
+    var g0, a, T, R,P;
+    g0 = 9.81, a = 0.004, R = 287, P = 1.225, T = 288.16;
+    var b1 = Math.pow((x/T),-((g0/(a*R))+1));
+    var b = b1*P;
+    return b;
+}
+
+function w(x) //Pressure in Isothermal Condition
+{
+    var g0, e,T, R,P;
+    g0 = -9.81, e = 2.718, R = 287, P = 100000, T = 288.16;
+    var k = g0/(T*R);
+    var b1 = Math.pow(e,(k*x));
+    var b = b1*P;
+    return b;
+}
+
+function y(x) //Density in Isothermal Condition
+{
+    var g0, e,T, R,P;
+    g0 = -9.81, e = 2.718, R = 287, P = 1.225, T = 288.16;
+    var k = g0/(T*R);
+    var b1 = Math.pow(e,(k*x));
+    var b = b1*P;
+    return b;
+}
+
+function main()
+{
+    var h,P,D,T;
+    h=document.getElementById("height").value;
+    if (h>0 && h<11)
+       {
+        T = f(h);
+        P = l(T);
+        D = ld(T);
+        document.getElementById("t").value=T;
+        document.getElementById("De").value=D;
+        document.getElementById("Pr").value=P;
+        document.getElementById("Na").value= "Troposphere";
+       }
+    else if (h>25 && h<47)
+       {
+        T = g(h);
+        P = m(T);
+        D = md(T);
+        document.getElementById("t").value=T;
+        document.getElementById("De").value=D;
+        document.getElementById("Pr").value=P;
+        document.getElementById("Na").value= "Stratosphere";
+       }
+    else if (h>53 && h<79)
+       {
+        T = j(h);
+        P = n(T);
+        D = nd(T);
+        document.getElementById("t").value=T;
+        document.getElementById("De").value=D;
+        document.getElementById("Pr").value=P;
+        document.getElementById("Na").value= "Mesosphere";
+       }
+    else if (h>90 && h<105)
+        {
+        T = k(h);
+        P = q(T);
+        D = qd(T);
+        document.getElementById("t").value=T;
+        document.getElementById("De").value=D;
+        document.getElementById("Pr").value=P;
+        document.getElementById("Na").value= "Thermosphere";
+        }
+
+    else
+        {
+        P = w(h);
+        D = y(h);
+        document.getElementById("t").value="Isothermal Layer";
+        document.getElementById("De").value=D;
+        document.getElementById("Pr").value=P;
+        document.getElementById("Na").value= "Isothermal Layer";
+        }
+}
+   </script>
+</body>
+
+</html>
