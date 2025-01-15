@@ -1,0 +1,44 @@
+# name: Schedule Google Colab Notebook
+
+# on:
+#   schedule:
+#     # Run daily at 7 AM UTC
+#     - cron: '0 7 * * *'
+#   workflow_dispatch:  # Allows manual trigger
+
+# jobs:
+#   run_colab_notebook:
+#     runs-on: ubuntu-latest
+#     steps:
+#       # Step 1: Checkout the repo to get the Colab notebook
+#       - name: Checkout Repository
+#         uses: actions/checkout@v2
+
+#       # Step 2: Set up Python
+#       - name: Set up Python
+#         uses: actions/setup-python@v2
+#         with:
+#           python-version: 3.8
+
+#       # Step 3: Install dependencies (you can install libraries if needed)
+#       - name: Install dependencies
+#         run: |
+#           pip install -r requirements.txt
+#           pip install gdown nbconvert
+
+#       # Step 4: Download Colab notebook from GitHub repo
+#       - name: Download Colab Notebook
+#         run: |
+#           cp path/to/your_notebook.ipynb .
+
+#       # Step 5: Execute the Colab notebook using `nbconvert` (locally)
+#       - name: Run Colab Notebook
+#         run: |
+#           jupyter nbconvert --execute --inplace --to notebook your_notebook.ipynb
+
+#       # Step 6: Upload result (optional)
+#       - name: Upload Output Notebook
+#         uses: actions/upload-artifact@v2
+#         with:
+#           name: notebook-output
+#           path: your_notebook.ipynb
